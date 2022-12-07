@@ -92,7 +92,7 @@ class Sprite implements Disposable {
 
 	public function update(dt:Float):Void {}
 
-	public function draw(g:Graphics):Void {}
+	public function draw(renderimage:Image):Void {}
 
 	public function onAdded():Void {}
 

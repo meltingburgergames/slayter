@@ -11,7 +11,8 @@ class ImageSprite extends Sprite {
 		this.image = image;
 	}
 
-	override function draw(g:Graphics) {
+	override function draw(renderimage:Image) {
+		var g = renderimage.g2;
 		g.drawImage(image, 0, 0);
 	}
 }

@@ -55,7 +55,7 @@ class Slayter {
 		var g = _backbuffer.g2;
 
 		g.begin(true, 0xffcccccc);
-		renderSprite(root, g);
+		renderSprite(root, _backbuffer);
 		g.end();
 
 		buffer.g2.begin();
@@ -63,18 +63,19 @@ class Slayter {
 		buffer.g2.end();
 	}
 
-	private function renderSprite(sprite:Sprite, g:Graphics) {
+	public static function renderSprite(sprite:Sprite, image:Image) {
 		if (!sprite.visible || sprite.alpha <= 0) {
 			return;
 		}
 
+		var g = image.g2;
 		g.pushOpacity(g.opacity * sprite.alpha);
 		sprite.updateMatrix();
 		g.pushTransformation(g.transformation.multmat(sprite._matrix));
 
-		sprite.draw(g);
+		sprite.draw(image);
 		for (c in sprite.children) {
-			renderSprite(c, g);
+			renderSprite(c, image);
 		}
 
 		g.popTransformation();

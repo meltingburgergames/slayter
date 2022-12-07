@@ -17,7 +17,8 @@ class NineSprite extends Sprite {
 		this.borderWidth = borderWidth;
 	}
 
-	override function draw(g:Graphics) {
+	override function draw(renderimage:Image) {
+		var g = renderimage.g2;
 		var iw = this.image.width;
 		var ih = this.image.height;
 		var bw = borderWidth;

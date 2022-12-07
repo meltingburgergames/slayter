@@ -1,5 +1,6 @@
 package slayter.display;
 
+import kha.Image;
 import kha.Color;
 import kha.Font;
 import kha.graphics2.Graphics;
@@ -21,7 +22,8 @@ class TextSprite extends Sprite {
 		_hasInitialized = true;
 	}
 
-	override function draw(g:Graphics) {
+	override function draw(renderimage:Image) {
+		var g = renderimage.g2;
 		var oldColor = g.color;
 		g.fontSize = size;
 		g.font = font;

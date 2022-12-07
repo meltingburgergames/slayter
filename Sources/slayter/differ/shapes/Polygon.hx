@@ -1,5 +1,6 @@
 package slayter.differ.shapes;
 
+import kha.Image;
 import slayter.display.Sprite;
 import kha.graphics2.Graphics;
 import slayter.differ.math.*;
@@ -47,7 +48,8 @@ class Polygon extends Shape {
 		return SAT2D.testRayVsPolygon(ray, this, into);
 	}
 
-	override public function draw(g:Graphics):Void {
+	override function draw(renderimage:Image) {
+		var g = renderimage.g2;
 		if(this.color == 0) {
 			return;
 		}

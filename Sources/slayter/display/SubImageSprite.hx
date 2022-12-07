@@ -19,7 +19,8 @@ class SubImageSprite extends Sprite {
 		this.sh = sh;
 	}
 
-	override function draw(g:Graphics) {
+	override function draw(renderimage:Image) {
+		var g = renderimage.g2;
 		g.drawSubImage(image, 0, 0, sx, sy, sw, sh);
 	}
 }
