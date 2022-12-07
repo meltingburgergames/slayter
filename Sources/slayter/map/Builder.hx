@@ -91,7 +91,7 @@ class Builder {
 				case "identifier", "pxWid", "pxHei", "tileGridSize", "spacing", "padding":
 					Reflect.setField(tileset, field, Reflect.getProperty(data, field));
 				case "relPath":
-					var relPath = Reflect.getProperty(data, field).split("-").join("_").split(".")[0];
+					var relPath = Reflect.getProperty(data, field);
 					Reflect.setField(tileset, field, relPath);
 			};
 		}
