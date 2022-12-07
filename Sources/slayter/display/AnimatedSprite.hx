@@ -79,8 +79,7 @@ class AnimatedSprite extends Sprite {
 		_elapsed += dt;
 	}
 
-	override function draw(renderimage:Image) {
-		var g = renderimage.g2;
+	override function draw(g:Graphics) {
 		var sx = (_index % _wLength) * width;
 		var sy = Math.floor(_index / _wLength) * height;
 		g.drawSubImage(image, 0, 0, sx, sy, width, height);

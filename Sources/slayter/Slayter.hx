@@ -1,5 +1,6 @@
 package slayter;
 
+import kha.math.FastMatrix3;
 import kha.graphics4.PipelineState;
 import kha.graphics2.Graphics;
 import kha.Scheduler;
@@ -19,6 +20,7 @@ class Slayter {
 	public function new(title:String, screenWidth:Int, screenHeight:Int, onStart:Slayter->Void):Void {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
+		_identity = FastMatrix3.identity();
 
 		System.start({
 			title: title,
@@ -28,6 +30,8 @@ class Slayter {
 		}, function(_) {
 			var lastTime:Float = -1;
 			this._backbuffer = Image.createRenderTarget(screenWidth, screenHeight);
+			this._shaderBuffer1 = Image.createRenderTarget(screenWidth, screenHeight);
+			this._shaderBuffer2 = Image.createRenderTarget(screenWidth, screenHeight);
 			this.root = new Sprite();
 
 			Scheduler.addTimeTask(function() {
@@ -55,7 +59,7 @@ class Slayter {
 		var g = _backbuffer.g2;
 
 		g.begin(true, 0xffcccccc);
-		renderSprite(root, _backbuffer);
+		renderSprite(root, g);
 		g.end();
 
 		buffer.g2.begin();
@@ -63,23 +67,57 @@ class Slayter {
 		buffer.g2.end();
 	}
 
-	public static function renderSprite(sprite:Sprite, image:Image) {
+	public function renderSprite(sprite:Sprite, g:Graphics) {
 		if (!sprite.visible || sprite.alpha <= 0) {
 			return;
 		}
 
-		var g = image.g2;
 		g.pushOpacity(g.opacity * sprite.alpha);
 		sprite.updateMatrix();
 		g.pushTransformation(g.transformation.multmat(sprite._matrix));
 
-		sprite.draw(image);
+		if (sprite.customPipeline != null) {
+			g.end();
+			_shaderBuffer1.g2.begin();
+			_shaderBuffer1.g2.drawImage(_backbuffer, 0, 0);
+			_shaderBuffer1.g2.end();
+			g.begin(true, 0);
+		}
+		sprite.draw(g);
 		for (c in sprite.children) {
-			renderSprite(c, image);
+			renderSprite(c, g);
+		}
+		if (sprite.customPipeline != null) {
+			g.end();
 		}
 
 		g.popTransformation();
 		g.popOpacity();
+
+		if (sprite.customPipeline != null) {
+			/**
+			 * Draw _buffer1 and then start pipeline and draw renderimage
+			 * then remove pipeline
+			 */
+			_shaderBuffer2.g2.begin();
+
+			_shaderBuffer2.g2.drawImage(_shaderBuffer1, 0, 0);
+			var p = _shaderBuffer2.g2.pipeline;
+			_shaderBuffer2.g2.pipeline = sprite.customPipeline;
+			_shaderBuffer2.g2.drawImage(_backbuffer, 0, 0);
+			_shaderBuffer2.g2.pipeline = p;
+			_shaderBuffer2.g2.end();
+
+			/**
+			 * Draw _buffer2 to renderimage
+			 */
+			g.begin();
+
+			var t = g.transformation;
+			g.transformation = _identity;
+			g.drawImage(_shaderBuffer2, 0, 0);
+			g.transformation = t;
+		}
 	}
 
 	public static function updateSprite(sprite:Sprite, dt:Float):Void {
@@ -97,4 +135,7 @@ class Slayter {
 	}
 
 	private var _backbuffer:Image;
+	private var _shaderBuffer1:Image;
+	private var _shaderBuffer2:Image;
+	private var _identity:FastMatrix3;
 }

@@ -1,7 +1,6 @@
 package slayter.display;
 
 import slayter.util.Disposable;
-import kha.Image;
 import kha.graphics4.PipelineState;
 import kha.math.Matrix3;
 import kha.graphics2.Graphics;
@@ -23,6 +22,7 @@ class Sprite implements Disposable {
 	public var visible:Bool;
 	public var children(default, null):Array<Sprite>;
 	public var parent(default, null):Sprite;
+	public var customPipeline:PipelineState = null;
 
 	public function new():Void {
 		this.active = true;
@@ -92,7 +92,7 @@ class Sprite implements Disposable {
 
 	public function update(dt:Float):Void {}
 
-	public function draw(renderimage:Image):Void {}
+	public function draw(g:Graphics):Void {}
 
 	public function onAdded():Void {}
 
@@ -114,9 +114,7 @@ class Sprite implements Disposable {
 		}
 	}
 
-	public function dispose() {
-
-	}
+	public function dispose() {}
 
 	private function set_x(x:Float):Float {
 		if (this.x != x) {

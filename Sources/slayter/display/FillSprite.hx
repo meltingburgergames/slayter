@@ -1,6 +1,5 @@
 package slayter.display;
 
-import kha.Image;
 import kha.graphics2.Graphics;
 
 class FillSprite extends Sprite {
@@ -15,8 +14,7 @@ class FillSprite extends Sprite {
 		this.height = height;
 	}
 
-	override function draw(renderimage:Image) {
-		var g = renderimage.g2;
+	override function draw(g:Graphics) {
 		var lastColor = g.color;
 		g.color = this.color;
 		g.fillRect(0, 0, width, height);
