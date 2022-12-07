@@ -17,17 +17,29 @@ class PipelineSprite extends Sprite {
 	}
 
 	override function draw(renderimage:Image) {
+		/**
+		 * Create backbuffers if they are null
+		 */
 		if(_backbuffer1 == null) {
 			_backbuffer1 = Image.createRenderTarget(renderimage.width, renderimage.height);
 			_backbuffer2 = Image.createRenderTarget(renderimage.width, renderimage.height);
 		}
+		/**
+		 * End renderimage g2
+		 */
 		renderimage.g2.end();
 
 
+		/**
+		 * Draw renderimage to _backbuffer1
+		 */
 		_backbuffer1.g2.begin();
 		_backbuffer1.g2.drawImage(renderimage, 0, 0);
 		_backbuffer1.g2.end();
 
+		/**
+		 * Draw children that have pipe to renderimage
+		 */
 		renderimage.g2.begin(true, 0);
 		for (c in this.pipelineChildren) {
 			Slayter.renderSprite(c, renderimage);
@@ -35,6 +47,10 @@ class PipelineSprite extends Sprite {
 		renderimage.g2.end();
 
 
+		/**
+		 * Draw _backbuffer1 and then start pipeline and draw renderimage
+		 * then remove pipeline
+		 */
 		_backbuffer2.g2.begin();
 		_backbuffer2.g2.drawImage(_backbuffer1, 0, 0);
 		var p = _backbuffer2.g2.pipeline;
@@ -43,6 +59,9 @@ class PipelineSprite extends Sprite {
 		_backbuffer2.g2.pipeline = p;
 		_backbuffer2.g2.end();
 
+		/**
+		 * Draw _backbuffer2 to renderimage
+		 */
 		renderimage.g2.begin();
 		var t = renderimage.g2.transformation;
 		renderimage.g2.transformation = _identity;
