@@ -48,6 +48,9 @@ class Polygon extends Shape {
 	}
 
 	override public function draw(g:Graphics):Void {
+		if(this.color == 0) {
+			return;
+		}
 		var oldColor = g.color;
 		g.color = color;
 		for (i in 0..._vertices.length) {
@@ -55,7 +58,7 @@ class Polygon extends Shape {
 			var v2 = _vertices[(i + 1) % _vertices.length];
 			g.drawLine(v1.x, v1.y, v2.x, v2.y);
 		}
-		g.fillCircle(anchorX, anchorY, 2);
+		g.fillCircle(anchorX, anchorY, 1);
 		g.color = oldColor;
 	}
 

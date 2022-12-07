@@ -24,6 +24,7 @@ class Slayter {
 			title: title,
 			width: screenWidth,
 			height: screenHeight,
+			framebuffer: {samplesPerPixel: 4}
 		}, function(_) {
 			var lastTime:Float = -1;
 			this._backbuffer = Image.createRenderTarget(screenWidth, screenHeight);
@@ -82,7 +83,7 @@ class Slayter {
 
 	public static function updateSprite(sprite:Sprite, dt:Float):Void {
 		sprite.update(dt);
-		if(!sprite.active) {
+		if (!sprite.active) {
 			return;
 		}
 		if (!sprite._hasCalledOnStart) {

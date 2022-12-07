@@ -11,4 +11,7 @@ class Scene extends Sprite implements Keyboardable {
     public var keydown (default, null):Signal1<KeyCode> = new Signal1();
     public var keyup (default, null):Signal1<KeyCode> = new Signal1();
     public var keypress (default, null):Signal1<String> = new Signal1();
+
+    public function onShown() : Void {}
+    public function onHidden() : Void {}
 }

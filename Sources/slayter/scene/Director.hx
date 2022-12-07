@@ -18,16 +18,19 @@ class Director extends Sprite {
 		// set new current scene timescale to 1
 		if (this.current != null) {
 			this.current.active = true;
+			this.current.onShown();
 		}
 	}
 
 	public function pushScene(scene:Scene):Void {
 		if (this.current != null) {
 			this.current.active = false;
+			this.current.onHidden();
 		}
 		scene.active = true;
 		scene.director = this;
 		this.addChild(scene);
+		this.current.onShown();
 	}
 
 	override function onAdded() {
@@ -38,20 +41,20 @@ class Director extends Sprite {
 		Keyboard.get().remove(onDown, onUp, onPress);
 	}
 
-	private function onDown(key :KeyCode) {
-		if(this.current != null) {
+	private function onDown(key:KeyCode) {
+		if (this.current != null) {
 			this.current.keydown.emit(key);
 		}
 	}
 
-	private function onUp(key :KeyCode) {
-		if(this.current != null) {
+	private function onUp(key:KeyCode) {
+		if (this.current != null) {
 			this.current.keyup.emit(key);
 		}
 	}
 
-	private function onPress(key :String) {
-		if(this.current != null) {
+	private function onPress(key:String) {
+		if (this.current != null) {
 			this.current.keypress.emit(key);
 		}
 	}

@@ -44,10 +44,13 @@ class Circle extends Shape {
 	}
 
 	override public function draw(g:Graphics):Void {
+		if(this.color == 0) {
+			return;
+		}
 		var oldColor = g.color;
 		g.color = color;
 		g.drawCircle(0, 0, _radius);
-		g.fillCircle(anchorX, anchorY, 2);
+		g.fillCircle(anchorX, anchorY, 1);
 		g.color = oldColor;
 	}
 

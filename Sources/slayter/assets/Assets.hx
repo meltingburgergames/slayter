@@ -1,9 +1,9 @@
 package slayter.assets;
 
 import kha.Image;
-import kha.Assets;
+import kha.Assets as KhaAssets;
 
-class SlayterAssets {
+class Assets {
     public static function getImage(name :String) : Image {
         if(!_hasInitialized) {
             init();
@@ -14,12 +14,13 @@ class SlayterAssets {
     private static function init() : Void {
         if(!_hasInitialized) {
             _images = new Map();
-            for(key in Reflect.fields(Assets.images)) {
-                var field = Reflect.getProperty(Assets.images, key);
+            for(key in Reflect.fields(KhaAssets.images)) {
+                var field = Reflect.getProperty(KhaAssets.images, key);
                 if(field.files != null) {
                     var imageName = field.name;
-                    var image = Reflect.getProperty(Assets.images, imageName);
-                    var fileName = field.files[0];
+                    var image = Reflect.getProperty(KhaAssets.images, imageName);
+                    var fileName :String = field.files[0];
+                    fileName = fileName.substring(0, fileName.lastIndexOf("."));
                     _images.set(fileName, image);
                 }
             }

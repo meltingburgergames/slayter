@@ -21,7 +21,7 @@ class NineSprite extends Sprite {
 		var iw = this.image.width;
 		var ih = this.image.height;
 		var bw = borderWidth;
-        g.drawScaledSubImage(image, bw, bw, iw - bw * 2, ih - bw * 2, bw, bw, width - bw * 2, height - bw * 2); // center
+		g.drawScaledSubImage(image, bw, bw, iw - bw * 2, ih - bw * 2, bw, bw, width - bw * 2, height - bw * 2); // center
 		g.drawSubImage(image, 0, 0, 0, 0, bw, bw); // tl
 		g.drawSubImage(image, width - bw, 0, iw - bw, 0, bw, bw); // tr
 		g.drawSubImage(image, 0, height - bw, 0, ih - bw, bw, bw); // bl

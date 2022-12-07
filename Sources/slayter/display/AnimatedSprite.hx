@@ -38,8 +38,8 @@ class AnimatedSprite extends Sprite {
 		return this;
 	}
 
-	public function loop(name :String, restart :Bool = false):AnimatedSprite {
-		if(_loopName == name && !restart) {
+	public function loop(name:String, restart:Bool = false):AnimatedSprite {
+		if (_loopName == name && !restart) {
 			return this;
 		}
 		_loopName = name;
@@ -52,7 +52,7 @@ class AnimatedSprite extends Sprite {
 		return this;
 	}
 
-	public function play(name :String):AnimatedSprite {
+	public function play(name:String):AnimatedSprite {
 		var anim = _animations.get(name);
 		_index = _start = anim.start;
 		_framerate = anim.framerate;
@@ -63,7 +63,7 @@ class AnimatedSprite extends Sprite {
 	}
 
 	override function update(dt:Float) {
-		if(_framerate == 0) {
+		if (_framerate == 0) {
 			return;
 		}
 		_index = Math.floor(_elapsed / _framerate) + _start;
