@@ -112,8 +112,6 @@ class Polygon extends Shape {
 		return create(3, radius);
 	}
 
-	// Internal
-
 	override function updateMatrix():Void {
 		var isDirty = _isDirty;
 		super.updateMatrix();
