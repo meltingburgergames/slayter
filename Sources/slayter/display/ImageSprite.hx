@@ -4,15 +4,14 @@ import kha.Image;
 import kha.graphics2.Graphics;
 
 class ImageSprite extends Sprite {
-	public var image(default, null):Image;
+	public var texture(default, null):Texture;
 
-	public function new(image:Image):Void {
+	public function new(texture:Texture):Void {
 		super();
-		this.image = image;
+		this.texture = texture;
 	}
 
-	override function draw(renderimage:Image) {
-		var g = renderimage.g2;
-		g.drawImage(image, 0, 0);
+	override function draw(g:Graphics) {
+		texture.draw(g, 0, 0);
 	}
 }

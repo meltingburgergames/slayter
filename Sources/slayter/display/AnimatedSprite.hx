@@ -1,23 +1,22 @@
 package slayter.display;
 
-import kha.Image;
 import kha.graphics2.Graphics;
 
 class AnimatedSprite extends Sprite {
-	public var image:Image;
+	public var texture:Texture;
 	public var width(default, null):Int;
 	public var height(default, null):Int;
 
-	public function new(image:Image, width:Int, height:Int):Void {
+	public function new(texture:Texture, width:Int, height:Int):Void {
 		super();
-		this.image = image;
+		this.texture = texture;
 		this.width = width;
 		this.height = height;
 		this._framerate = 0;
 		_index = 0;
 		_elapsed = 0;
-		_wLength = Math.floor(image.width / width);
-		_hLength = Math.floor(image.height / height);
+		_wLength = Math.floor(texture.width / width);
+		_hLength = Math.floor(texture.height / height);
 		_start = _loopStart = 0;
 		_end = _loopEnd = _wLength * _hLength;
 		_animations = new Map();
@@ -82,7 +81,7 @@ class AnimatedSprite extends Sprite {
 	override function draw(g:Graphics) {
 		var sx = (_index % _wLength) * width;
 		var sy = Math.floor(_index / _wLength) * height;
-		g.drawSubImage(image, 0, 0, sx, sy, width, height);
+		texture.drawSubImage(g, 0, 0, sx, sy, width, height);
 	}
 
 	private var _elapsed:Float;

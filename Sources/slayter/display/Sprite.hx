@@ -2,10 +2,8 @@ package slayter.display;
 
 import slayter.util.Disposable;
 import kha.graphics4.PipelineState;
-import kha.math.Matrix3;
 import kha.graphics2.Graphics;
 import kha.math.FastMatrix3;
-import kha.Framebuffer;
 
 @:allow(slayter.Slayter)
 class Sprite implements Disposable {

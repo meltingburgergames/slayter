@@ -1,15 +1,12 @@
 package slayter;
 
 import kha.math.FastMatrix3;
-import kha.graphics4.PipelineState;
 import kha.graphics2.Graphics;
 import kha.Scheduler;
 import kha.System;
 import kha.Scaler;
 import kha.Image;
 import kha.Framebuffer;
-import kha.Canvas;
-import kha.graphics4.Graphics2;
 import slayter.display.Sprite;
 
 class Slayter {

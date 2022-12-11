@@ -1,10 +1,11 @@
 package slayter.assets;
 
-import kha.Image;
+import slayter.display.BaseTexture;
+import slayter.display.Texture;
 import kha.Assets as KhaAssets;
 
 class Assets {
-    public static function getImage(name :String) : Image {
+    public static function getImage(name :String) : Texture {
         if(!_hasInitialized) {
             init();
         }
@@ -21,7 +22,7 @@ class Assets {
                     var image = Reflect.getProperty(KhaAssets.images, imageName);
                     var fileName :String = field.files[0];
                     fileName = fileName.substring(0, fileName.lastIndexOf("."));
-                    _images.set(fileName, image);
+                    _images.set(fileName, new BaseTexture(image));
                 }
             }
             _hasInitialized = true;
@@ -29,5 +30,5 @@ class Assets {
     }
 
     private static var _hasInitialized = false;
-    private static var _images :Map<String, Image>;
+    private static var _images :Map<String, Texture>;
 }
