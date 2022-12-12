@@ -9,6 +9,8 @@ import kha.Image;
 import kha.Framebuffer;
 import slayter.display.Sprite;
 
+using slayter.display.BlendMode.BlendModeUtil;
+
 class Slayter {
 	public var screenWidth:Int;
 	public var screenHeight:Int;
@@ -73,7 +75,7 @@ class Slayter {
 		sprite.updateMatrix();
 		g.pushTransformation(g.transformation.multmat(sprite._matrix));
 
-		if (sprite.customPipeline != null) {
+		if (sprite.pipeline != null) {
 			g.end();
 			_shaderBuffer1.g2.begin();
 			_shaderBuffer1.g2.drawImage(_backbuffer, 0, 0);
@@ -84,14 +86,14 @@ class Slayter {
 		for (c in sprite.children) {
 			renderSprite(c, g);
 		}
-		if (sprite.customPipeline != null) {
+		if (sprite.pipeline != null) {
 			g.end();
 		}
 
 		g.popTransformation();
 		g.popOpacity();
 
-		if (sprite.customPipeline != null) {
+		if (sprite.pipeline != null) {
 			/**
 			 * Draw _buffer1 and then start pipeline and draw renderimage
 			 * then remove pipeline
@@ -100,7 +102,9 @@ class Slayter {
 
 			_shaderBuffer2.g2.drawImage(_shaderBuffer1, 0, 0);
 			var p = _shaderBuffer2.g2.pipeline;
-			_shaderBuffer2.g2.pipeline = sprite.customPipeline;
+			_shaderBuffer2.g2.pipeline = sprite.pipeline;
+
+			sprite.pipeline.setBlendMode(sprite.blendmode);
 			_shaderBuffer2.g2.drawImage(_backbuffer, 0, 0);
 			_shaderBuffer2.g2.pipeline = p;
 			_shaderBuffer2.g2.end();
