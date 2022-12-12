@@ -11,6 +11,9 @@ class TextSprite extends Sprite {
 	public var color:Int;
 	public var wrapWidth(default, set):Float;
 
+	public var width(get, null):Float;
+	public var height(get, null):Float;
+
 	public function new(text:String, size:Int, font:Font):Void {
 		super();
 		this.text = text;
@@ -19,6 +22,7 @@ class TextSprite extends Sprite {
 		this.color = Color.Black;
 		this.wrapWidth = -1;
 		_hasInitialized = true;
+		setDims();
 	}
 
 	override function draw(g:Graphics) {
@@ -94,8 +98,36 @@ class TextSprite extends Sprite {
 				_textSplit.push(cur);
 			}
 		}
+		setDims();
+	}
+
+	private function setDims() : Void {
+		if(wrapWidth > 0) {
+			_height = font.height(size) * _textSplit.length;
+			var w = 0.0;
+			for(line in _textSplit) {
+				var w_ = font.width(size, line);
+				if(w_ > w) {
+					w = w_;
+				}
+			}
+			_width = w;
+		}
+		else {
+
+		}
+	}
+
+	private function get_width() : Float {
+		return _width;
+	}
+
+	private function get_height() : Float {
+		return _height;
 	}
 
 	private var _textSplit:Array<String> = [];
-	private var _hasInitialized :Bool = false;
+	private var _hasInitialized:Bool = false;
+	private var _width :Float = 0;
+	private var _height :Float = 0;
 }
