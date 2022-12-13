@@ -8,22 +8,26 @@ import slayter.differ.data.*;
 /** A base collision shape */
 class Shape extends Sprite {
 	public var color:Int = 0xffffffff;
-	public var manager(default, null):CollisionManager;
+	public var manager(default, null):Null<CollisionManager>;
 
-	public function new(?manager :Null<CollisionManager>) : Void {
+	public function new(?manager:Null<CollisionManager>):Void {
 		super();
-		this.manager = manager == null ? CollisionManager.defaultManager : manager;
+		this.manager = manager;
 	}
 
 	override function onAdded() {
-		this.manager.addShape(this);
+		if (manager != null) {
+			manager.addShape(this);
+		}
 	}
 
 	override function onRemoved() {
-		this.manager.removeShape(this);
+		if (manager != null) {
+			manager.removeShape(this);
+		}
 	}
 
-	public function onShapeCollide(info :ShapeCollision) : Void {}
+	public function onShapeCollide(info:ShapeCollision):Void {}
 
 	// Implemented in subclasses
 

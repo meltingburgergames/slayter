@@ -4,8 +4,6 @@ import slayter.differ.shapes.Shape;
 import slayter.differ.data.ShapeCollision;
 
 class CollisionManager {
-    public static var defaultManager (get, null) : CollisionManager;
-
     public function new() : Void {
         this._shapes = [];
     }
@@ -33,13 +31,4 @@ class CollisionManager {
     }
 
     private var _shapes :Array<Shape>;
-
-    private static function get_defaultManager() :CollisionManager {
-        if(_defaultManager == null) {
-            _defaultManager = new CollisionManager();
-        }
-        return _defaultManager;
-    }
-
-    private static var _defaultManager : CollisionManager = null;
 }

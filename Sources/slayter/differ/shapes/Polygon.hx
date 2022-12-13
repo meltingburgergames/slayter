@@ -21,7 +21,7 @@ class Polygon extends Shape {
 	var _vertices:Array<DifferVec>;
 
 	/** Create a new polygon with a given set of vertices at position x,y. */
-	public function new(vertices:Array<DifferVec>, ?manager :Null<CollisionManager>) {
+	public function new(vertices:Array<DifferVec>, ?manager :CollisionManager) {
 		super(manager);
 		_transformedVertices = new Array<DifferVec>();
 		_vertices = vertices;
