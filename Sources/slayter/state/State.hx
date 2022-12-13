@@ -1,7 +1,7 @@
 package slayter.state;
 
-interface State {
-	function update(dt:Float):Void;
-	function onStarted():Void;
-	function onEnded():Void;
+class State {
+	public function update(dt:Float):Void {}
+	public function onStarted():Void {}
+	public function onEnded():Void {}
 }
