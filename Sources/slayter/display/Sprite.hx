@@ -20,6 +20,7 @@ class Sprite implements Disposable {
 	public var visible:Bool;
 	public var children(default, null):Array<Sprite>;
 	public var parent(default, null):Sprite;
+	public var pipeline:PipelineState = null;
 	public var filter:PipelineState = null;
 
 	public function new():Void {

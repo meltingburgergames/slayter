@@ -6,7 +6,7 @@ import kha.graphics5_.VertexData;
 import kha.graphics5_.VertexStructure;
 import kha.graphics4.PipelineState;
 
-class BlendMode {
+class ImageBlendMode {
 	public static var Normal(get, null):PipelineState;
 	public static var Add(get, null):PipelineState;
 	public static var Multiply(get, null):PipelineState;

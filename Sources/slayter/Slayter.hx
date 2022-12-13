@@ -80,7 +80,10 @@ class Slayter {
 			_shaderBuffer1.g2.end();
 			g.begin(true, 0);
 		}
+		var p = g.pipeline;
+		g.pipeline = sprite.pipeline;
 		sprite.draw(g);
+		g.pipeline = p;
 		for (c in sprite.children) {
 			renderSprite(c, g);
 		}
