@@ -62,7 +62,6 @@ class Builder {
 			case "IntGrid":
 				Reflect.setField(layer, "type", IntGrid(tilesetIndex, autoLayerTiles));
 		}
-		// trace(data.__type);
 		return cast layer;
 	}
 
