@@ -21,7 +21,6 @@ class Sprite implements Disposable {
 	public var children(default, null):Array<Sprite>;
 	public var parent(default, null):Sprite;
 	public var filter:PipelineState = null;
-	public var blendmode:BlendMode = BlendMode.Normal;
 
 	public function new():Void {
 		this.active = true;

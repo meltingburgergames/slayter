@@ -9,8 +9,6 @@ import kha.Image;
 import kha.Framebuffer;
 import slayter.display.Sprite;
 
-using slayter.display.BlendMode.BlendModeUtil;
-
 class Slayter {
 	public var screenWidth:Int;
 	public var screenHeight:Int;
@@ -104,7 +102,6 @@ class Slayter {
 			var p = _shaderBuffer2.g2.pipeline;
 			_shaderBuffer2.g2.pipeline = sprite.filter;
 
-			sprite.filter.setBlendMode(sprite.blendmode);
 			_shaderBuffer2.g2.drawImage(_backbuffer, 0, 0);
 			_shaderBuffer2.g2.pipeline = p;
 			_shaderBuffer2.g2.end();
