@@ -1,66 +1,85 @@
 package slayter.display;
 
-import kha.graphics4.BlendingOperation;
-import kha.graphics4.BlendingFactor;
 import kha.graphics4.PipelineState;
 
-// <option selected>normal</option>
-// <option>multiply</option>
-// <option>screen</option>
-// <option>overlay</option>
-// <option>darken</option>
-// <option>lighten</option>
-// <option>color-dodge</option>
-// <option>color-burn</option>
-// <option>hard-light</option>
-// <option>soft-light</option>
-// <option>difference</option>
-// <option>exclusion</option>
-// <option>hue</option>
-// <option>saturation</option>
-// <option>color</option>
-// <option>luminosity</option>
 
 enum BlendMode {
-	None;
+	Normal;
 	Add;
 	Multiply;
 	Screen;
+	Subtract;
 	Erase;
-	Default;
+	Mask;
+	Below;
+	Darken;
+	Lighten;
 }
 
 extern class BlendModeUtil {
 	inline public static function setBlendMode(pipeline:PipelineState, mode:BlendMode):PipelineState {
 		switch mode {
-			case None:
-				applyBlendMode(pipeline, BlendOne, BlendZero);
-			case Default:
-				applyBlendMode(pipeline, SourceAlpha, InverseSourceAlpha);
-			case Add:
-				applyBlendMode(pipeline, BlendOne, BlendOne);
-			case Multiply:
-				applyBlendMode(pipeline, DestinationColor, InverseSourceAlpha);
-			case Screen:
-				applyBlendMode(pipeline, BlendOne, InverseSourceColor);
-			case Erase:
-				applyBlendMode(pipeline, BlendZero, InverseSourceColor);
+			case Normal:
+				pipeline.blendSource = BlendOne;
+				pipeline.blendDestination = InverseSourceAlpha;
+				pipeline.alphaBlendSource = BlendOne;
+				pipeline.alphaBlendDestination = InverseSourceAlpha;
+                pipeline.alphaBlendOperation = Add;
+            case Add:
+				pipeline.blendSource = BlendOne;
+				pipeline.blendDestination = BlendOne;
+				pipeline.alphaBlendSource = BlendOne;
+				pipeline.alphaBlendDestination = BlendOne;
+                pipeline.alphaBlendOperation = Add;
+            case Multiply:
+				pipeline.blendSource = DestinationColor;
+				pipeline.blendDestination = InverseSourceAlpha;
+				pipeline.alphaBlendSource = DestinationColor;
+				pipeline.alphaBlendDestination = InverseSourceAlpha;
+                pipeline.alphaBlendOperation = Add;
+            case Screen:
+				pipeline.blendSource = BlendOne;
+				pipeline.blendDestination = InverseSourceColor;
+				pipeline.alphaBlendSource = BlendOne;
+				pipeline.alphaBlendDestination = InverseSourceColor;
+                pipeline.alphaBlendOperation = Add;
+            case Subtract:
+				pipeline.blendSource = BlendOne;
+				pipeline.blendDestination = BlendOne;
+				pipeline.alphaBlendSource = BlendOne;
+				pipeline.alphaBlendDestination = BlendOne;
+                pipeline.alphaBlendOperation = ReverseSubtract;
+            case Erase:
+				pipeline.blendSource = BlendZero;
+				pipeline.blendDestination = InverseSourceAlpha;
+				pipeline.alphaBlendSource = BlendZero;
+				pipeline.alphaBlendDestination = InverseSourceAlpha;
+                pipeline.alphaBlendOperation = Add;
+            case Mask:
+				pipeline.blendSource = BlendZero;
+				pipeline.blendDestination = SourceAlpha;
+				pipeline.alphaBlendSource = BlendZero;
+				pipeline.alphaBlendDestination = SourceAlpha;
+                pipeline.alphaBlendOperation = Add;
+            case Below:
+				pipeline.blendSource = InverseDestinationAlpha;
+				pipeline.blendDestination = DestinationAlpha;
+				pipeline.alphaBlendSource = InverseDestinationAlpha;
+				pipeline.alphaBlendDestination = DestinationAlpha;
+                pipeline.alphaBlendOperation = Add;
+            case Darken:
+				pipeline.blendSource = BlendOne;
+				pipeline.blendDestination = BlendOne;
+				pipeline.alphaBlendSource = BlendOne;
+				pipeline.alphaBlendDestination = BlendOne;
+                pipeline.alphaBlendOperation = Min;
+            case Lighten:
+				pipeline.blendSource = BlendOne;
+				pipeline.blendDestination = BlendOne;
+				pipeline.alphaBlendSource = BlendOne;
+				pipeline.alphaBlendDestination = BlendOne;
+                pipeline.alphaBlendOperation = Max;
 		}
-		return pipeline;
-	}
-
-	inline public static function applyBlendMode(pipeline:PipelineState, src:BlendingFactor, dst:BlendingFactor, ?op:BlendingOperation):PipelineState {
-		if (op == null) {
-			op = BlendingOperation.Add;
-		}
-
-		pipeline.blendSource = src;
-		pipeline.alphaBlendSource = src;
-		pipeline.blendDestination = dst;
-		pipeline.alphaBlendDestination = dst;
-		pipeline.blendOperation = op;
-		pipeline.alphaBlendOperation = op;
-
 		return pipeline;
 	}
 }
