@@ -66,7 +66,7 @@ class Polygon extends Shape {
 
 	/** Helper to create an Ngon at x,y with given number of sides, and radius.
 		A default radius of 100 if unspecified. Returns a ready made `Polygon` collision `Shape` */
-	public static function create(sides:Int, radius:Float = 100):Polygon {
+	public static function create(sides:Int, radius:Float = 100, ?manager :CollisionManager):Polygon {
 		if (sides < 3) {
 			throw 'Polygon - Needs at least 3 sides';
 		}
@@ -84,12 +84,12 @@ class Polygon extends Shape {
 			vertices.push(vector);
 		}
 
-		return new Polygon(vertices);
+		return new Polygon(vertices, manager);
 	}
 
 	/** Helper generate a rectangle at x,y with a given width/height and centered state.
 		Centered by default. Returns a ready made `Polygon` collision `Shape` */
-	public static function rectangle(width:Float, height:Float):Polygon {
+	public static function rectangle(width:Float, height:Float, ?manager :CollisionManager):Polygon {
 		var vertices:Array<DifferVec> = new Array<DifferVec>();
 
 		vertices.push(new DifferVec(0, 0));
@@ -97,19 +97,19 @@ class Polygon extends Shape {
 		vertices.push(new DifferVec(width, height));
 		vertices.push(new DifferVec(0, height));
 
-		return new Polygon(vertices);
+		return new Polygon(vertices, manager);
 	}
 
 	/** Helper generate a square at x,y with a given width/height with given centered state.
 		Centered by default. Returns a ready made `Polygon` collision `Shape` */
-	public static inline function square(width:Float):Polygon {
-		return rectangle(width, width);
+	public static inline function square(width:Float, ?manager :CollisionManager):Polygon {
+		return rectangle(width, width, manager);
 	}
 
 	/** Helper generate a triangle at x,y with a given radius.
 		Returns a ready made `Polygon` collision `Shape` */
-	public static function triangle(radius:Float):Polygon {
-		return create(3, radius);
+	public static function triangle(radius:Float, ?manager :CollisionManager):Polygon {
+		return create(3, radius, manager);
 	}
 
 	override function updateMatrix():Void {
