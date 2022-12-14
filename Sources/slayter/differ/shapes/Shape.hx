@@ -8,6 +8,8 @@ import slayter.differ.data.*;
 /** A base collision shape */
 class Shape extends Sprite {
 	public var color:Int = 0xffffffff;
+	public var userShapeId:Int = -1;
+	public var userData:Dynamic = null;
 	public var manager(default, null):Null<CollisionManager>;
 
 	public function new(?manager:Null<CollisionManager>):Void {
