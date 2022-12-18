@@ -13,7 +13,7 @@ class Director extends Sprite {
 		if (this.current != null) {
 			this.current.active = true;
 			this.current.director = null;
-			this.current.removeSelf();
+			this.current.dispose();
 		}
 		// set new current scene timescale to 1
 		if (this.current != null) {

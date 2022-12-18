@@ -14,4 +14,6 @@ typedef Layer = {
 	layerDefUid:Int,
 	visible:Bool,
 	type: LayerType,
+	width: Int,
+	height: Int,
 }

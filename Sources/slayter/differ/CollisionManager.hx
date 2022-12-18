@@ -1,10 +1,12 @@
 package slayter.differ;
 
+import slayter.display.Sprite;
 import slayter.differ.shapes.Shape;
 import slayter.differ.data.ShapeCollision;
 
-class CollisionManager {
+class CollisionManager extends Sprite {
     public function new() : Void {
+        super();
         this._shapes = [];
     }
 
@@ -17,7 +19,7 @@ class CollisionManager {
     }
 
     private var _scratch = new ShapeCollision();
-    public function update() : Void {
+    override public function update(dt :Float) : Void {
         for(shape1 in _shapes) {
             for(shape2 in _shapes) {
                 if(shape1 != shape2) {

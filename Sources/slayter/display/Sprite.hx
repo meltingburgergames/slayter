@@ -18,7 +18,7 @@ class Sprite implements Disposable {
 	public var rotation(default, set):Float;
 	public var alpha:Float;
 	public var visible:Bool;
-	public var children(default, null):Array<Sprite>;
+	public var children(default, null):Children;
 	public var parent(default, null):Sprite;
 	public var pipeline:PipelineState = null;
 	public var filter:PipelineState = null;
@@ -35,7 +35,7 @@ class Sprite implements Disposable {
 		this.rotation = 0;
 		this.alpha = 1;
 		this.visible = true;
-		this.children = [];
+		this.children = new Children();
 	}
 
 	public function setXY(x:Float, y:Float):Sprite {
@@ -101,19 +101,18 @@ class Sprite implements Disposable {
 
 	public function onEnd():Void {}
 
-	public function removeSelf():Void {
-		if (this.parent != null) {
-			this.parent.removeChild(this);
+	public function disposeChildren() {
+		while (children.length != 0) {
+			children.last().dispose();
 		}
 	}
 
-	public function removeChildren():Void {
-		while (this.children.length > 0) {
-			this.children[this.children.length - 1].removeSelf();
+	public function dispose() {
+		if (parent != null) {
+			parent.removeChild(this);
 		}
+		disposeChildren();
 	}
-
-	public function dispose() {}
 
 	private function set_x(x:Float):Float {
 		if (this.x != x) {

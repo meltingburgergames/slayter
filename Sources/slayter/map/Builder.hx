@@ -23,6 +23,10 @@ class Builder {
 					tilesetIndex = __tilesetDefUid != null ? tilesetIndexes.get(__tilesetDefUid) : null;
 				case "__identifier":
 					Reflect.setField(layer, "identifier", Reflect.getProperty(data, field));
+				case "__cWid":
+					Reflect.setField(layer, "width", Reflect.getProperty(data, field));
+				case "__cHei":
+					Reflect.setField(layer, "height", Reflect.getProperty(data, field));
 				case "autoLayerTiles":
 					var tiles:Array<Dynamic> = Reflect.getProperty(data, "autoLayerTiles");
 					for (tile in tiles) {
@@ -90,7 +94,7 @@ class Builder {
 				case "identifier", "pxWid", "pxHei", "tileGridSize", "spacing", "padding":
 					Reflect.setField(tileset, field, Reflect.getProperty(data, field));
 				case "relPath":
-					var relPath :String = Reflect.getProperty(data, field);
+					var relPath:String = Reflect.getProperty(data, field);
 					relPath = relPath.substring(0, relPath.lastIndexOf("."));
 					Reflect.setField(tileset, field, relPath);
 			};
