@@ -1,3 +1,7 @@
+<div align="center">
+	<img alt="Slayter" src="slayter.jpg" width="50%" height="50%">
+</div>
+
 # Welcome to Slayter, the 2D game engine!
 
 Slayter is a powerful and flexible game engine that makes it easy to create and run 2D games. It provides a wide range of tools and libraries that help you build and run games quickly and efficiently, including:
