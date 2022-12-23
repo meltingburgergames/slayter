@@ -14,6 +14,16 @@ class Slayter {
 	public var screenHeight:Int;
 	public var root(default, null):Sprite;
 
+	/**
+	 * Constructs a new `Slayter` game instance.
+	 *
+	 * @param title The title of the game window.
+	 * @param screenWidth The width of the game screen, in pixels.
+	 * @param screenHeight The height of the game screen, in pixels.
+	 * @param onStart A callback function that is called once the game has started and is ready to be interacted with.
+	 *
+	 * @return Void
+	 */
 	public function new(title:String, screenWidth:Int, screenHeight:Int, onStart:Slayter->Void):Void {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
@@ -48,10 +58,24 @@ class Slayter {
 		});
 	}
 
+	/**
+	 * The `update` function is called each frame to update the state of the game.
+	 *
+	 * @param dt The elapsed time since the last frame update, in seconds. This value is used to ensure consistent behavior across different frame rates.
+	 *
+	 * @return Void
+	 */
 	public inline function update(dt:Float):Void {
 		updateSprite(root, dt);
 	}
 
+	/**
+	 * The `render` function is called each frame to render the game's graphics to the screen.
+	 *
+	 * @param buffer The framebuffer to render the game's graphics to.
+	 *
+	 * @return Void
+	 */
 	public function render(buffer:Framebuffer):Void {
 		var g = _backbuffer.g2;
 
@@ -64,6 +88,14 @@ class Slayter {
 		buffer.g2.end();
 	}
 
+	/**
+	 * The `renderSprite` function is called by the `render` function to recursively render a sprite and its children.
+	 *
+	 * @param sprite The sprite to render.
+	 * @param g The graphics context to render the sprite to.
+	 *
+	 * @return Void
+	 */
 	public function renderSprite(sprite:Sprite, g:Graphics) {
 		if (!sprite.visible || sprite.alpha <= 0) {
 			return;
@@ -121,6 +153,14 @@ class Slayter {
 		}
 	}
 
+	/**
+	 * The `updateSprite` function is a helper function that recursively updates a sprite and its children.
+	 *
+	 * @param sprite The sprite to update.
+	 * @param dt The elapsed time since the last frame update, in seconds. This value is used to ensure consistent behavior across different frame rates.
+	 *
+	 * @return Void
+	 */
 	public static function updateSprite(sprite:Sprite, dt:Float):Void {
 		sprite.update(dt);
 		if (!sprite.active) {

@@ -21,7 +21,7 @@ class Polygon extends Shape {
 	var _vertices:Array<DifferVec>;
 
 	/** Create a new polygon with a given set of vertices at position x,y. */
-	public function new(vertices:Array<DifferVec>, ?manager :CollisionManager) {
+	public function new(vertices:Array<DifferVec>, ?manager:CollisionManager) {
 		super(manager);
 		_transformedVertices = new Array<DifferVec>();
 		_vertices = vertices;
@@ -48,7 +48,7 @@ class Polygon extends Shape {
 	}
 
 	override public function draw(g:Graphics):Void {
-		if(this.color == 0) {
+		if (this.color == 0) {
 			return;
 		}
 		var oldColor = g.color;
@@ -66,7 +66,7 @@ class Polygon extends Shape {
 
 	/** Helper to create an Ngon at x,y with given number of sides, and radius.
 		A default radius of 100 if unspecified. Returns a ready made `Polygon` collision `Shape` */
-	public static function create(sides:Int, radius:Float = 100, ?manager :CollisionManager):Polygon {
+	public static function create(sides:Int, radius:Float = 100, ?manager:CollisionManager):Polygon {
 		if (sides < 3) {
 			throw 'Polygon - Needs at least 3 sides';
 		}
@@ -89,7 +89,7 @@ class Polygon extends Shape {
 
 	/** Helper generate a rectangle at x,y with a given width/height and centered state.
 		Centered by default. Returns a ready made `Polygon` collision `Shape` */
-	public static function rectangle(width:Float, height:Float, ?manager :CollisionManager):Polygon {
+	public static function rectangle(width:Float, height:Float, ?manager:CollisionManager):Polygon {
 		var vertices:Array<DifferVec> = new Array<DifferVec>();
 
 		vertices.push(new DifferVec(0, 0));
@@ -102,13 +102,13 @@ class Polygon extends Shape {
 
 	/** Helper generate a square at x,y with a given width/height with given centered state.
 		Centered by default. Returns a ready made `Polygon` collision `Shape` */
-	public static inline function square(width:Float, ?manager :CollisionManager):Polygon {
+	public static inline function square(width:Float, ?manager:CollisionManager):Polygon {
 		return rectangle(width, width, manager);
 	}
 
 	/** Helper generate a triangle at x,y with a given radius.
 		Returns a ready made `Polygon` collision `Shape` */
-	public static function triangle(radius:Float, ?manager :CollisionManager):Polygon {
+	public static function triangle(radius:Float, ?manager:CollisionManager):Polygon {
 		return create(3, radius, manager);
 	}
 

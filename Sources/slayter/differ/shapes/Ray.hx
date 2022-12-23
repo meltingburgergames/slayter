@@ -31,7 +31,7 @@ class Ray {
 
 		// internal
 		dir_cache = new DifferVec(end.x - start.x, end.y - start.y);
-	} 
+	}
 
 	// properties
 	var dir_cache:DifferVec;

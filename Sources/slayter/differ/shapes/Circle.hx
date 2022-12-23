@@ -18,7 +18,7 @@ class Circle extends Shape {
 
 	var _radius:Float;
 
-	public function new(radius:Float, ?manager :Null<CollisionManager>) {
+	public function new(radius:Float, ?manager:Null<CollisionManager>) {
 		super(manager);
 		_radius = radius;
 	}
@@ -44,7 +44,7 @@ class Circle extends Shape {
 	}
 
 	override public function draw(g:Graphics):Void {
-		if(this.color == 0) {
+		if (this.color == 0) {
 			return;
 		}
 		var oldColor = g.color;
