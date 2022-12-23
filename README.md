@@ -8,7 +8,7 @@ Slayter is a powerful and flexible game engine that makes it easy to create and 
 
 - **Multiple sprite types**: Slayter includes support for a variety of sprite types, including static sprites, animated sprites, and tiled sprites. You can easily create and manipulate sprites in your game code, and use them to build your game world.
 
-- **Asset management**: Slayter comes with a robust asset management system that makes it easy to load and manage game assets, such as graphics, audio, and level data. You can easily import and organize your assets using the built-in asset manager.
+- **Asset management**: Slayter comes with a robust asset management system that makes it easy to load and manage game assets, such as graphics, audio, and level data.
 
 - **Collision management**: Slayter includes a collision detection system that can handle basic collisions between sprites, as well as more complex collisions using custom shapes. You can use the collision system to create interactive game mechanics and gameplay elements.
 
