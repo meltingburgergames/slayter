@@ -2,11 +2,37 @@ package slayter.display;
 
 import kha.graphics2.Graphics;
 
+/**
+ * A sprite for displaying an animated texture.
+ * @param {Texture} texture - The texture to animate.
+ * @param {number} width - The width of a single frame in the animation.
+ * @param {number} height - The height of a single frame in the animation.
+ */
 class AnimatedSprite extends Sprite {
+	/**
+	 * The texture to animate.
+	 * @type {Texture}
+	 */
 	public var texture:Texture;
+
+	/**
+	 * The width of the sprite.
+	 * @type {number}
+	 */
 	public var width(default, null):Int;
+
+	/**
+	 * The height of the sprite.
+	 * @type {number}
+	 */
 	public var height(default, null):Int;
 
+	/**
+	 * Creates a new AnimatedSprite instance.
+	 * @param {Texture} texture - The texture to animate.
+	 * @param {number} width - The width of a single frame in the animation.
+	 * @param {number} height - The height of a single frame in the animation.
+	 */
 	public function new(texture:Texture, width:Int, height:Int):Void {
 		super();
 		this.texture = texture;
@@ -22,6 +48,15 @@ class AnimatedSprite extends Sprite {
 		_animations = new Map();
 	}
 
+	/**
+	 * Adds an animation to the sprite.
+	 * @param {string} name - The name of the animation.
+	 * @param {number} start - The index of the first frame of the animation.
+	 * @param {number} end - The index of the last frame of the animation.
+	 * @param {number} framerate - The framerate of the animation, in frames per second.
+	 * @param {function} [cb] - A callback function to be called when the animation finishes playing.
+	 * @return {AnimatedSprite} The AnimatedSprite instance.
+	 */
 	public function addAnimation(name:String, start:Int, end:Int, framerate:Float, ?cb:Void->Void):AnimatedSprite {
 		_animations.set(name, {
 			start: start,
@@ -32,11 +67,23 @@ class AnimatedSprite extends Sprite {
 		return this;
 	}
 
+	/**
+	 * Updates the callback function for an animation.
+	 * @param {string} name - The name of the animation.
+	 * @param {function} [cb] - The new callback function for the animation.
+	 * @return {AnimatedSprite} The AnimatedSprite instance.
+	 */
 	public function updateCB(name:String, ?cb:Void->Void):AnimatedSprite {
 		_animations.get(name).cb = cb;
 		return this;
 	}
 
+	/**
+	 * Sets the sprite to loop an animation.
+	 * @param {string} name - The name of the animation to loop.
+	 * @param {boolean} [restart=false] - Whether to restart the animation from the beginning if it is already playing.
+	 * @return {AnimatedSprite} The AnimatedSprite instance.
+	 */
 	public function loop(name:String, restart:Bool = false):AnimatedSprite {
 		if (_loopName == name && !restart) {
 			return this;
@@ -51,6 +98,11 @@ class AnimatedSprite extends Sprite {
 		return this;
 	}
 
+	/**
+	 * Plays an animation once.
+	 * @param {string} name - The name of the animation to play.
+	 * @return {AnimatedSprite} The AnimatedSprite instance.
+	 */
 	public function play(name:String):AnimatedSprite {
 		var anim = _animations.get(name);
 		_index = _start = anim.start;
@@ -61,6 +113,10 @@ class AnimatedSprite extends Sprite {
 		return this;
 	}
 
+	/**
+	 * Updates the sprite's animation.
+	 * @param {float} dt - The elapsed time since the last update, in seconds.
+	 */
 	override function update(dt:Float) {
 		if (_framerate == 0) {
 			return;
@@ -78,6 +134,10 @@ class AnimatedSprite extends Sprite {
 		_elapsed += dt;
 	}
 
+	/**
+	 * Draws the sprite on the given graphics object.
+	 * @param {Graphics} g - The graphics object to draw on.
+	 */
 	override function draw(g:Graphics) {
 		var sx = (_index % _wLength) * width;
 		var sy = Math.floor(_index / _wLength) * height;

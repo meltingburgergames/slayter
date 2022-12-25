@@ -4,16 +4,61 @@ import kha.Color;
 import kha.Font;
 import kha.graphics2.Graphics;
 
+/**
+ * A sprite for displaying text.
+ * @param {string} text - The text to display.
+ * @param {number} size - The size of the text.
+ * @param {Font} font - The font to use for the text.
+ */
 class TextSprite extends Sprite {
+	/**
+	 * The text to display.
+	 * @type {string}
+	 */
 	public var text(default, set):String;
+
+	/**
+	 * The size of the text.
+	 * @type {number}
+	 */
 	public var size(default, set):Int;
+
+	/**
+	 * The font to use for the text.
+	 * @type {Font}
+	 */
 	public var font(default, set):Font;
+
+	/**
+	 * The color of the text.
+	 * @type {number}
+	 */
 	public var color:Int;
+
+	/**
+	 * The maximum width to wrap the text at. A value of -1 indicates no wrapping.
+	 * @type {number}
+	 */
 	public var wrapWidth(default, set):Float;
 
+	/**
+	 * The width of the sprite.
+	 * @type {number}
+	 */
 	public var width(get, null):Float;
+
+	/**
+	 * The height of the sprite.
+	 * @type {number}
+	 */
 	public var height(get, null):Float;
 
+	/**
+	 * Creates a new TextSprite instance.
+	 * @param {string} text - The text to display.
+	 * @param {number} size - The size of the text.
+	 * @param {Font} font - The font to use for the text.
+	 */
 	public function new(text:String, size:Int, font:Font):Void {
 		super();
 		this.text = text;
@@ -25,6 +70,10 @@ class TextSprite extends Sprite {
 		setDims();
 	}
 
+	/**
+	 * Draws the sprite onto the given graphics object.
+	 * @param {Graphics} g - The graphics object to draw onto.
+	 */
 	override function draw(g:Graphics) {
 		var oldColor = g.color;
 		g.fontSize = size;
@@ -43,10 +92,18 @@ class TextSprite extends Sprite {
 		g.color = oldColor;
 	}
 
+	/**
+	 * Gets the width of the sprite.
+	 * @return {number} The width of the sprite.
+	 */
 	public function getWidth():Float {
 		return font.width(size, text);
 	}
 
+	/**
+	 * Gets the height of the sprite.
+	 * @return {number} The height of the sprite.
+	 */
 	public function getHeight():Float {
 		return font.height(size);
 	}
@@ -101,33 +158,30 @@ class TextSprite extends Sprite {
 		setDims();
 	}
 
-	private function setDims() : Void {
-		if(wrapWidth > 0) {
+	private function setDims():Void {
+		if (wrapWidth > 0) {
 			_height = font.height(size) * _textSplit.length;
 			var w = 0.0;
-			for(line in _textSplit) {
+			for (line in _textSplit) {
 				var w_ = font.width(size, line);
-				if(w_ > w) {
+				if (w_ > w) {
 					w = w_;
 				}
 			}
 			_width = w;
-		}
-		else {
-
-		}
+		} else {}
 	}
 
-	private function get_width() : Float {
+	private function get_width():Float {
 		return _width;
 	}
 
-	private function get_height() : Float {
+	private function get_height():Float {
 		return _height;
 	}
 
 	private var _textSplit:Array<String> = [];
 	private var _hasInitialized:Bool = false;
-	private var _width :Float = 0;
-	private var _height :Float = 0;
+	private var _width:Float = 0;
+	private var _height:Float = 0;
 }

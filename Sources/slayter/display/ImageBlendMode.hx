@@ -6,16 +6,80 @@ import kha.graphics5_.VertexData;
 import kha.graphics5_.VertexStructure;
 import kha.graphics4.PipelineState;
 
+/**
+ * A class that represents different blend modes for rendering images.
+ *
+ * @package slayter.display
+ */
 class ImageBlendMode {
+	/**
+	 * A blend mode that combines the source and destination colors by blending them using their alpha values.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Normal(get, null):PipelineState;
+
+	/**
+	 * A blend mode that adds the source and destination colors together.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Add(get, null):PipelineState;
+
+	/**
+	 * A blend mode that combines the source and destination colors by multiplying them.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Multiply(get, null):PipelineState;
+
+	/**
+	 * A blend mode that combines the source and destination colors by taking their average.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Screen(get, null):PipelineState;
+
+	/**
+	 * A blend mode that subtracts the source color from the destination color.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Subtract(get, null):PipelineState;
+
+	/**
+	 * A blend mode that erases the destination color with the source color.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Erase(get, null):PipelineState;
+
+	/**
+	 * A blend mode that combines the source and destination colors based on the alpha values of the source color.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Mask(get, null):PipelineState;
+
+	/**
+	 * A blend mode that only draws the source color where the destination color is transparent.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Below(get, null):PipelineState;
+
+	/**
+	 * A blend mode that chooses the darker of the source and destination colors.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Darken(get, null):PipelineState;
+
+	/**
+	 * A blend mode that chooses the lighter of the source and destination colors.
+	 *
+	 * @type {PipelineState}
+	 */
 	public static var Lighten(get, null):PipelineState;
 
 	private static function init() {

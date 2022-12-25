@@ -2,12 +2,49 @@ package slayter.display;
 
 import kha.graphics2.Graphics;
 
+/**
+ * A sprite that displays a texture using 9-slice scaling.
+ *
+ * @class slayter.display.NineSprite
+ * @extends {Sprite}
+ */
 class NineSprite extends Sprite {
+	/**
+	 * The texture to display.
+	 *
+	 * @type {Texture}
+	 */
 	public var texture(default, null):Texture;
+
+	/**
+	 * The width of the sprite, in pixels.
+	 *
+	 * @type {number}
+	 */
 	public var width:Float;
+
+	/**
+	 * The height of the sprite, in pixels.
+	 *
+	 * @type {number}
+	 */
 	public var height:Float;
+
+	/**
+	 * The width of the border around the center of the texture, in pixels.
+	 *
+	 * @type {number}
+	 */
 	public var borderWidth:Float;
 
+	/**
+	 * Creates a new nine sprite with the specified texture, width, height, and border width.
+	 *
+	 * @param {Texture} texture - The texture to display.
+	 * @param {number} width - The width of the sprite.
+	 * @param {number} height - The height of the sprite.
+	 * @param {number} borderWidth - The width of the border around the center of the texture.
+	 */
 	public function new(texture:Texture, width:Float, height:Float, borderWidth:Float):Void {
 		super();
 		this.texture = texture;
@@ -16,6 +53,9 @@ class NineSprite extends Sprite {
 		this.borderWidth = borderWidth;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	override function draw(g:Graphics) {
 		var iw = texture.width;
 		var ih = texture.height;
