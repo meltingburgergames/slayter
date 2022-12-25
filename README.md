@@ -1,5 +1,5 @@
 <div align="center">
-	<img alt="Slayter" src="slayter.jpg" width="50%" height="50%">
+	<img alt="Slayter" src="slayter.jpg" width="50%" height="50%" style="border-radius: 5px;">
 </div>
 
 # SLAYTER!
