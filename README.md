@@ -2,9 +2,15 @@
 	<img alt="Slayter" src="slayter.jpg" width="50%" height="50%">
 </div>
 
-# Welcome to Slayter, the 2D game engine!
+# SLAYTER!
 
 Slayter is a powerful and flexible game engine that makes it easy to create and run 2D games. It provides a wide range of tools and libraries that help you build and run games quickly and efficiently, including:
+
+- **Cross-platform support**: Slayter supports deployment on Windows, Mac, Linux, iOS, Android, and more. You can build your game once and deploy it to a wide range of platforms with minimal effort.
+
+- **High-performance rendering**: Our engine uses a modern 2D rendering pipeline, optimized for both performance and visual quality. You can expect smooth gameplay and beautiful graphics, even on low-end devices.
+
+- **Extensive documentation**: We've put a lot of effort into our documentation, making it easy to get started and learn the ins and outs of our engine. Whether you're a beginner or an experienced developer, you'll find the information you need to build amazing games.
 
 - **Multiple sprite types**: Slayter includes support for a variety of sprite types, including static sprites, animated sprites, and tiled sprites. You can easily create and manipulate sprites in your game code, and use them to build your game world.
 
