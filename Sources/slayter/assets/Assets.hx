@@ -1,5 +1,6 @@
 package slayter.assets;
 
+import kha.Sound;
 import haxe.ds.Map;
 import kha.Font;
 import slayter.display.BaseTexture;
@@ -45,6 +46,21 @@ class Assets {
 	}
 
 	/**
+	 * Retrieves a sound asset by name.
+	 * 
+	 * The `Assets` class must be initialized before calling this method.
+	 * 
+	 * @param name - The name of the sound asset to retrieve.
+	 * @return The sound asset with the specified name, or `null` if it does not exist.
+	 */
+	public static function getSound(name:String):Sound {
+		if (!_hasInitialized) {
+			init();
+		}
+		return _sounds.get(name);
+	}
+
+	/**
 	 * Initializes the `Assets` class by populating its internal maps of images and fonts.
 	 * 
 	 * This method should be called before accessing any images or fonts through the `getImage` or `getFont` methods. It only needs to be called once.
@@ -75,6 +91,18 @@ class Assets {
 				}
 			}
 
+			_sounds = new Map();
+			for (key in Reflect.fields(KhaAssets.sounds)) {
+				var field = Reflect.getProperty(KhaAssets.sounds, key);
+				if (field.files != null) {
+					var soundName = field.name;
+					var sound = Reflect.getProperty(KhaAssets.sounds, soundName);
+					var fileName:String = field.files[0];
+					fileName = fileName.substring(0, fileName.lastIndexOf("."));
+					_sounds.set(fileName, sound);
+				}
+			}
+
 			_hasInitialized = true;
 		}
 	}
@@ -82,4 +110,5 @@ class Assets {
 	private static var _hasInitialized = false;
 	private static var _images:Map<String, Texture>;
 	private static var _fonts:Map<String, Font>;
+	private static var _sounds:Map<String, Sound>;
 }
