@@ -22,7 +22,9 @@ class Audio implements Disposable {
 		_channel.stop();
 	}
 
-	public function dispose() {}
+	public function dispose() {
+        _channel.stop();
+    }
 
 	private var _channel:AudioChannel;
 }
