@@ -106,7 +106,7 @@ class FuzzySet<T:EnumValue> {
 	 *
 	 * @return The `ret` object, or `null` if the fuzzy set is empty.
 	 */
-	public function max(val, ret:{value:T, dom:Float}):Null<{value:T, dom:Float}> {
+	public function max(val:Float, ret:{value:T, dom:Float}):Null<{value:T, dom:Float}> {
 		ret.value = null;
 		ret.dom = FMath.FLOAT_MIN;
 		for (item in items) {
